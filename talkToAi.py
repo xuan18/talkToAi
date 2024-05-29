@@ -52,7 +52,7 @@ while loop_controler:
     print("# 寻找意图")
     print(f"assistant: 为何提出【{optimized_text}】")
     ask_intent = input("\n")
-    pyperclip(ask_intent)
+    pyperclip.copy(ask_intent)
 
     # 步骤三（简称：明义优化回答）
     # 针对用户上述回答中可能存在的语义不明确之处，持续提问以获得更清晰的理解。然后，基于这一理解优化并重写回答。以 Markdown 代码输出：优化后的回答。
@@ -94,17 +94,15 @@ while loop_controler:
         decision_scene = input("\n assistant: 决策场景是什么？\n")
 
 # 备份聊天记录
-with open('history.txt', 'a') as f:
+with open('history.txt', 'a', encoding='utf-8') as f:
     # 遍历字典列表
     for message in history:
         # 创建格式化的字符串
         formatted_message = f"{message['role']}: {message['content']}\n\n"
         # 写入文件
         f.write(formatted_message)
+    f.write(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 
 # 步骤七（简称：显示代码）
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
-print(ultimate_goal)
-print(goal_orientation)
-print(decision_scene)
 pyperclip.copy(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")

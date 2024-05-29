@@ -8,3 +8,20 @@ user: 基于所有对话内容，优化并重写我提供的文本
 
 assistant: "这个驱蚊液气味有点刺鼻。"
 
+user: 针对我提供的句子'f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}"'中可能存在的语义不明确之处，提出一个问题以获得更清晰的理解。注意，对话惜字如金和不客套，不问涉及句子的意图。
+
+assistant: 请问“目标倾向”是指具体的目标方向还是目标达成的偏好？
+
+user: q
+
+user: 基于所有对话内容，优化并重写我提供的文本
+
+assistant: "最终目标：{ultimate_goal}
+目标性质：{goal_orientation}（是指具体的目标方向还是达成目标的偏好？）
+决策背景：{decision_scene}"
+
+最终目标：e
+
+目标倾向：t
+
+决策场景：y
