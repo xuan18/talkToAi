@@ -32,16 +32,14 @@ history.append(user_content)
 print("# 明义优化文本")
 print(f"user: {pyperclip.paste()}\n")
 clarify_and_rewrite_with_ai(history)
-
 text = input("user: ")
 user_content = {"role": "user", "content": text}
 history.append(user_content)
-
 reiterate = {"role": "user", "content": "基于所有对话内容，优化并重写我提供的文本"}
 history.append(reiterate)
 print("\n\n # 明义优化文本")
 optimized_text = clarify_and_rewrite_with_ai(history)
-#
+
 # 控制循环
 loop_controler = True
 
@@ -54,6 +52,7 @@ while loop_controler:
     print("# 寻找意图")
     print(f"assistant: 为何提出【{optimized_text}】")
     ask_intent = input("\n")
+    pyperclip(ask_intent)
 
     # 步骤三（简称：明义优化回答）
     # 针对用户上述回答中可能存在的语义不明确之处，持续提问以获得更清晰的理解。然后，基于这一理解优化并重写回答。以 Markdown 代码输出：优化后的回答。
