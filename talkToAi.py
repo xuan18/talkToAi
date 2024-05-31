@@ -6,8 +6,8 @@ import json
 # 创建Client实例
 client = ZhipuAI(api_key="818ae5253337f2acefd85aacf76d0b38.xeyM0qoTFRegnXC9")
 
-# 使用智谱AI模型来优化和重写文本
-def clarify_and_rewrite_with_ai(json_list):
+# 询问 AI
+def talk_with_AI(json_list):
     response = client.chat.completions.create(
         model="glm-4",  # 替换为实际使用的模型名称
         messages=json_list,
@@ -59,18 +59,32 @@ while loop_step:
             first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，向我提出两个问题，第一个问题用于修正句法错误，第二个问题用于明确语义。注意，对话惜字如金和不客套，不问涉及句子的意图。"
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
-            print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+            # print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+
+            # 第一个问题
+            print(f"# 明义优化文本（一） \n ")
             write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            clarify_and_rewrite_with_ai(history)
+            talk_with_AI(history)
             text = input("user: ")
             blank_line()
             write_history(text)
             user_content = {"role": "user", "content": text}
             history.append(user_content)
+
+            # 第二个问题
+            print(f"# 明义优化文本（二） \n ")
+            write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+            talk_with_AI(history)
+            text = input("user: ")
+            blank_line()
+            write_history(text)
+            user_content = {"role": "user", "content": text}
+            history.append(user_content)
+
             reiterate = {"role": "user", "content": "基于所有对话内容，优化并重写我提供的文本"}
             history.append(reiterate)
             print("\n\n # 明义优化文本")
-            optimized_text = clarify_and_rewrite_with_ai(history)
+            optimized_text = talk_with_AI(history)
 
             # 备份 history
             with open('history.txt', 'a', encoding='utf-8') as f:
@@ -87,6 +101,7 @@ while loop_step:
             step_two = False
             print("# 寻找意图")
             ask_intent = input(f"assistant: 为何提出【{optimized_text}】\n")
+            blank_line()
             if ask_intent == '返回':
                 step_one = True
                 break
