@@ -56,10 +56,10 @@ while loop_step:
             first_talk = False
 
             # 只提出一到两个问题
-            first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，向我提出两个问题，第一个问题用于修正句法错误，第二个问题用于明确语义。注意，对话惜字如金和不客套，不问涉及句子的意图。"
+            first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，向我提出最多两个问题，第一个问题用于修正句法错误，第二个问题用于明确语义。注意，每次只提出一个问题，对话惜字如金和不客套，不问涉及句子的意图。"
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
-            # print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+            print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
 
             # 第一个问题
             print(f"# 明义优化文本（一） \n ")
