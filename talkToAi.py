@@ -59,7 +59,6 @@ while loop_step:
             first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，向我提出最多两个问题，第一个问题用于修正句法错误，第二个问题用于明确语义。注意，每次只提出一个问题，对话惜字如金和不客套，不问涉及句子的意图。"
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
-            print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
 
             # 第一个问题
             print(f"# 明义优化文本（一） \n ")
@@ -140,20 +139,23 @@ while loop_step:
 
         # 步骤六（简称：是否确定破坏主要目标）
         # 询问{忽略此文本，是否确定破坏主要目标？}。若用户回复“确定”，则返回步骤二。
+        # - 紧急程度（# 紧急# 可能紧急# 不紧急，推迟这个待办产生的不良程度）
+        #     重要程度（# 重要# 可能重要# 不重要，对目标的重要程度）
         if step_six == True:
             step_six = False
-            confirm = input(f"assistant: 忽略【{optimized_text}】，是否确定破坏主要目标？\n")
+            
+            confirm = input(f"assistant: 【{optimized_text}】对目标的作用？\n")
+            importance = input('重要程度？')
+            if importance == '不重要':
+                break
+            input('推迟这个待办产生的不良影响？')
+            urgency = input('紧急程度？')
             blank_line()
             write_history(confirm)
             if confirm == '返回':
                 step_four = True
                 step_two = False
                 break
-            elif confirm == '确定':
-                ask_goal_destroyed = input("assistant: 破坏了什么目标？\n")
-                blank_line()
-                write_history(ask_goal_destroyed)
-                pyperclip.copy(ask_goal_destroyed)
             else:
                 loop_controler = False
                 loop_step = False
@@ -163,12 +165,13 @@ while loop_step:
                 break
             else:
                 ultimate_goal = temporary
-                goal_orientation = input("\n assistant: 目标是倾向于进取还是保守？\n")
+                goal_orientation = input("\n assistant: 目标是倾向于进取还是保守？")
                 blank_line()
                 write_history(goal_orientation)
-                decision_scene = input("\n assistant: 决策场景是什么？\n")
+                decision_scene = input("\n assistant: 决策场景是什么？")
                 blank_line()
                 write_history(decision_scene)
+                break
 
 
 # 步骤七（简称：显示代码）
@@ -176,3 +179,4 @@ while loop_step:
 if ultimate_goal != None:
     goal_orientation = ''
     pyperclip.copy(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
+    pyperclip.copy(f"#{importance} #{urgency}")
