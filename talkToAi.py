@@ -1,7 +1,7 @@
 import pyperclip
 from zhipuai import ZhipuAI
 import json
-
+import time
 
 # 创建Client实例
 client = ZhipuAI(api_key="818ae5253337f2acefd85aacf76d0b38.xeyM0qoTFRegnXC9")
@@ -55,14 +55,13 @@ while loop_step:
             history = []
             first_talk = False
 
-            # 只提出一到两个问题
-            first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，向我提出最多两个问题，第一个问题用于修正句法错误，第二个问题用于明确语义。注意，每次只提出一个问题，对话惜字如金和不客套，不问涉及句子的意图。"
+            # 开始对话
+            print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+            first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，如果存在句法错误或明确语义，则向我提出问题。注意，最多提出两个问题，对话惜字如金和不客套，不问涉及句子的意图。"           
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
-
-            # 第一个问题
+            write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
             print(f"# 明义优化文本（一） \n ")
-            write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
             talk_with_AI(history)
             text = input("user: ")
             blank_line()
@@ -70,16 +69,7 @@ while loop_step:
             user_content = {"role": "user", "content": text}
             history.append(user_content)
 
-            # 第二个问题
-            print(f"# 明义优化文本（二） \n ")
-            write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            talk_with_AI(history)
-            text = input("user: ")
-            blank_line()
-            write_history(text)
-            user_content = {"role": "user", "content": text}
-            history.append(user_content)
-
+            # 基于所有对话内容，优化并重写我提供的文本
             reiterate = {"role": "user", "content": "基于所有对话内容，优化并重写我提供的文本"}
             history.append(reiterate)
             print("\n\n # 明义优化文本")
@@ -90,7 +80,7 @@ while loop_step:
                 # 遍历字典列表
                 for message in history:
                     # 创建格式化的字符串
-                    formatted_message = f"{message['role']}: {message['content']}\n\n"
+                    formatted_message = f"{message['role']}: {message['content']}"
                     # 写入文件
                     f.write(formatted_message) 
 
@@ -105,7 +95,6 @@ while loop_step:
                 step_one = True
                 break
             write_history(ask_intent)
-            blank_line()
             pyperclip.copy(ask_intent)
 
         # 步骤三（简称：明义优化回答）
@@ -134,7 +123,6 @@ while loop_step:
 
             # 步骤五（简称：重申）
             # 以 Markdown 代码输出：步骤三中优化后的回答。
-            print(f"优化后文本：{ask_intent}\n")
             step_six = True
 
         # 步骤六（简称：是否确定破坏主要目标）
@@ -145,38 +133,34 @@ while loop_step:
             step_six = False
             
             confirm = input(f"assistant: 【{optimized_text}】对目标的作用？\n")
-            importance = input('重要程度？')
+            importance = input('重要程度？\n')
             if importance == '不重要':
                 break
-            input('推迟这个待办产生的不良影响？')
-            urgency = input('紧急程度？')
-            blank_line()
+            input('推迟这个待办产生的不良影响？\n')
+            urgency = input('紧急程度？\n')
             write_history(confirm)
             if confirm == '返回':
                 step_four = True
                 step_two = False
-                break
-            else:
-                loop_controler = False
-                loop_step = False
                 break
 
             if temporary == "最后一步":
                 break
             else:
                 ultimate_goal = temporary
-                goal_orientation = input("\n assistant: 目标是倾向于进取还是保守？")
+                goal_orientation = input(f"assistant:【 {temporary}】是倾向于进取还是保守？\n")
                 blank_line()
                 write_history(goal_orientation)
-                decision_scene = input("\n assistant: 决策场景是什么？")
+                decision_scene = input("assistant: 决策场景是什么？")
                 blank_line()
                 write_history(decision_scene)
+                loop_controler = False
+                loop_step = False
                 break
 
 
 # 步骤七（简称：显示代码）
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
-if ultimate_goal != None:
-    goal_orientation = ''
-    pyperclip.copy(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
-    pyperclip.copy(f"#{importance} #{urgency}")
+pyperclip.copy(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
+time.sleep(2)
+pyperclip.copy(f"#{importance} #{urgency}")
