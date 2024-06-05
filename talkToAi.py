@@ -107,7 +107,7 @@ while loop_step:
         # 决策场景是什么？
         # ]
         if step_four == True:
-            temporary = input("\n最终目标是什么？\n")
+            temporary = input("最终目标是什么？\n")
             blank_line()
             step_four = False
             if temporary == '返回':
@@ -147,9 +147,9 @@ while loop_step:
                 break
             else:
                 ultimate_goal = temporary
-                goal_orientation = input(f"assistant:【 {temporary}】是倾向于进取还是保守？\n\n")
+                goal_orientation = input(f"\n assistant:【 {temporary}】是倾向于进取还是保守？\n")
                 write_history(goal_orientation)
-                decision_scene = input("assistant: 决策场景是什么？")
+                decision_scene = input("\n assistant: 决策场景是什么？\n")
                 blank_line()
                 write_history(decision_scene)
                 loop_controler = False
