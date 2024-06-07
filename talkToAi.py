@@ -90,7 +90,6 @@ while loop_step:
             step_two = False
             print("# 寻找意图")
             ask_intent = input(f"assistant: 为何提出【{optimized_text}】\n")
-            blank_line()
             if ask_intent == '返回':
                 step_one = True
                 break
@@ -152,7 +151,6 @@ while loop_step:
                 blank_line()
                 write_history(goal_orientation)
                 decision_scene = input("assistant: 决策场景是什么？")
-                blank_line()
                 write_history(decision_scene)
                 loop_controler = False
                 loop_step = False
@@ -162,5 +160,6 @@ while loop_step:
 # 步骤七（简称：显示代码）
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
 pyperclip.copy(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
-time.sleep(2)
+write_history(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
+time.sleep(1)
 pyperclip.copy(f"#{importance} #{urgency}")
