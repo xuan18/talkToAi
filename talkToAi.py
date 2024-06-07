@@ -137,8 +137,8 @@ while loop_step:
             importance = input('\n重要程度？\n')
             if importance == 0:
                 break
-            input('推迟这个待办的不良影响？\n')
-            urgency = input('紧急程度？\n')
+            input('\n推迟这个待办的不良影响？\n')
+            urgency = input('\n紧急程度？\n')
             write_history(confirm)
             if confirm == '返回':
                 step_four = True
