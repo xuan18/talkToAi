@@ -87,7 +87,7 @@ while loop_step:
         # 询问用户：‘为何提出此？’
         if step_two == True:
             step_two = False
-            print("# 寻找意图")
+            print("\n# 寻找意图")
             ask_intent = input(f"assistant: 为何提出【{optimized_text}】\n")
             blank_line()
             if ask_intent == '返回':
@@ -106,12 +106,14 @@ while loop_step:
         # 目标是倾向于进取还是保守？
         # 决策场景是什么？
         # ]
+        print("\n# 询问问题")
         if step_four == True:
             temporary = input("最终目标是什么？\n")
             blank_line()
             step_four = False
             if temporary == '返回':
                 step_two = True
+                step_four = True
                 break
 
             #保存上一次的最终目标
@@ -131,11 +133,11 @@ while loop_step:
         if step_six == True:
             step_six = False
             
-            confirm = input(f"assistant: 【{optimized_text}】对目标的作用？\n")
-            importance = input('重要程度？\n')
-            if importance == '不重要':
+            confirm = input(f"assistant: 结合上级目标和最终目标，评估【{ultimate_goal}】对目标的作用？\n")
+            importance = input('\n重要程度？\n')
+            if importance == 0:
                 break
-            input('推迟这个待办产生的不良影响？\n')
+            input('推迟这个待办的不良影响？\n')
             urgency = input('紧急程度？\n')
             write_history(confirm)
             if confirm == '返回':
@@ -161,4 +163,4 @@ while loop_step:
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
 pyperclip.copy(f"是否要继续完成待办？\n\n最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 time.sleep(2)
-pyperclip.copy(f"#{importance} #{urgency}")
+pyperclip.copy(f"#{importance}+{urgency}")
