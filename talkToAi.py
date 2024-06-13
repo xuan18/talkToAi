@@ -150,7 +150,7 @@ while loop_step:
                 ultimate_goal = temporary
                 goal_orientation = input(f"\n assistant:【 {temporary}】是倾向于进取还是保守？\n")
                 write_history(goal_orientation)
-                decision_scene = input("\n assistant: 决策场景是什么？\n")
+                decision_scene = input("assistant: 决策场景是什么？")
                 write_history(decision_scene)
                 loop_controler = False
                 loop_step = False
