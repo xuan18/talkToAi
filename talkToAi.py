@@ -133,11 +133,26 @@ while loop_step:
             step_six = False
             
             confirm = input(f"assistant: 结合上级目标和最终目标，评估【{ultimate_goal}】对目标的作用？\n")
-            importance = input('\n重要程度？\n')
+            importance = input('''
+                               \n重要程度？
+                               不重要|1
+                                未知|2
+                                轻微|3
+                                较重要|4
+                                非常重要|5\n''')
             if importance == 0:
                 break
             input('\n推迟这个待办的不良影响？\n')
-            urgency = input('\n紧急程度？\n')
+            urgency = input('''
+                            \n紧急程度？
+                            不紧急|1
+                            未知|2
+                            几年内|3
+                            几个月|4
+                            几个星期|5
+                            几天|6
+                            马上完成|7\n
+                            ''')
             write_history(confirm)
             if confirm == '返回':
                 step_four = True
@@ -162,4 +177,4 @@ while loop_step:
 pyperclip.copy(f"是否要继续完成待办？\n\n最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 write_history(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 time.sleep(1)
-pyperclip.copy(f"#{importance}+{urgency}")
+pyperclip.copy(f"#{urgency}+{importance}")
