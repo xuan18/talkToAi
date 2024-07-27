@@ -107,7 +107,7 @@ while loop_step:
         # ]
         print("\n# 询问问题")
         if step_four == True:
-            temporary = input("最终目标是什么？\n")
+            temporary = input("目标倾向和最终目标是什么？\n")
             blank_line()
             step_four = False
             if temporary == '返回':
@@ -132,38 +132,38 @@ while loop_step:
         if step_six == True:
             step_six = False
             
-            confirm = input(f"assistant: 结合上级目标和最终目标，评估【{ultimate_goal}】对目标的作用？\n")
-            importance = input('''
-\n重要程度？\n
-不重要|1
-未知|2
-轻微|3
-较重要（感觉对目标有重大影响的）|4
-非常重要（既定计划、六步法（途径分析）、GROW（收益大小-实施难度评估矩阵））|5\n''')
-            if importance == 0:
-                break
-            input('\n推迟这个待办的不良影响？\n')
-            urgency = input('''
-\n紧急程度？\n
-不紧急|1
-未知|2
-几年内|3
-几个月|4
-几个星期|5
-几天|6
-马上完成|7\n''')
-            write_history(confirm)
-            if confirm == '返回':
-                step_four = True
-                step_two = False
-                break
+#             confirm = input(f"assistant: 结合上级目标和最终目标，评估【{ultimate_goal}】对目标的作用？\n")
+#             importance = input('''
+# \n重要程度？\n
+# 不重要|1
+# 未知|2
+# 轻微|3
+# 较重要（感觉对目标有重大影响的）|4
+# 非常重要（既定计划、六步法（途径分析）、GROW（收益大小-实施难度评估矩阵））|5\n''')
+#             if importance == 0:
+#                 break
+#             input('\n推迟这个待办的不良影响？\n')
+#             urgency = input('''
+# \n紧急程度？\n
+# 不紧急|1
+# 未知|2
+# 几年内|3
+# 几个月|4
+# 几个星期|5
+# 几天|6
+# 马上完成|7\n''')
+#             write_history(confirm)
+            # if confirm == '返回':
+            #     step_four = True
+            #     step_two = False
+            #     break
 
             if temporary == "最后一步":
                 break
             else:
                 ultimate_goal = temporary
-                goal_orientation = input(f"\n assistant:【 {temporary}】是倾向于进取还是保守？\n")
-                write_history(goal_orientation)
+                # goal_orientation = input(f"\n assistant:【 {temporary}】是倾向于进取还是保守？\n")
+                # write_history(goal_orientation)
                 decision_scene = input("\n assistant: 决策场景是什么？\n")
                 write_history(decision_scene)
                 loop_controler = False
@@ -173,7 +173,7 @@ while loop_step:
 
 # 步骤七（简称：显示代码）
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
-pyperclip.copy(f"是否要继续完成待办？\n\n最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
+pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf")
 write_history(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 time.sleep(1)
-pyperclip.copy(f"#{urgency}+{importance}")
+# pyperclip.copy(f"#{urgency}+{importance}")
