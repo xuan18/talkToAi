@@ -57,7 +57,7 @@ while loop_step:
 
             # 开始对话
             print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            first_text = "针对我提供的句子'"+ pyperclip.paste() + "'，如果存在句法错误或明确语义，则向我提出问题。注意，最多提出两个问题，对话惜字如金和不客套，不问涉及句子的意图。"           
+            first_text = "针对这个句子'"+ pyperclip.paste() + "'，如果其存在句法错误或需要明确语义，则向我提出问题。注意，最多提出一个问题，对话惜字如金、不客套和不涉及句子的意图。"           
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
             write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
