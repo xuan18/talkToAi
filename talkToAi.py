@@ -9,7 +9,7 @@ client = ZhipuAI(api_key="818ae5253337f2acefd85aacf76d0b38.xeyM0qoTFRegnXC9")
 # 询问 AI
 def talk_with_AI(json_list):
     response = client.chat.completions.create(
-        model="glm-4",  # 替换为实际使用的模型名称
+        model="glm-4-flash",  # 替换为实际使用的模型名称
         messages=json_list,
         )
     optimized_text = response.choices[0].message.content
@@ -57,11 +57,11 @@ while loop_step:
 
             # 开始对话
             print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            first_text = "针对这个句子'"+ pyperclip.paste() + "'，如果其存在句法错误或需要明确语义，则向我提出问题。注意，最多提出一个问题，对话惜字如金、不客套和不涉及句子的意图。"           
+            first_text = "针对这个句子'"+ pyperclip.paste() + "'，如果其存在句法错误，则优化并重写这个句子。注意，提出最多两个优化并重写后可能的结果，对话惜字如金、不客套和不涉及句子的意图。"           
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
             write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            print(f"# 明义优化文本（一） \n ")
+            print(f"# 明义优化文本 \n ")
             talk_with_AI(history)
             text = input("user: ")
             write_history(text)
