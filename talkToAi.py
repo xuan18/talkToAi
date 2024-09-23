@@ -57,7 +57,7 @@ while loop_step:
 
             # 开始对话
             print(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
-            first_text = "针对这个句子'"+ pyperclip.paste() + "'，如果其存在句法错误或需要明确语义，则向我提出问题。注意，最多提出一个问题，对话惜字如金、不客套和不涉及句子的意图。"           
+            first_text = "针对这个句子'"+ pyperclip.paste() + "'，如果其存在句法错误或需要明确语义，则向我提出问题。如果这个句子不存在句法错误或不需要明确语义，则优化并重写这个句子。注意，最多提出一个问题，对话惜字如金、不客套和不涉及句子的意图。"           
             user_content = {"role": "user", "content": first_text}
             history.append(user_content)
             write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
@@ -173,7 +173,7 @@ while loop_step:
 
 # 步骤七（简称：显示代码）
 # 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
-pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf")
+pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf\n\n已记录依据？")
 write_history(f"最终目标：{ultimate_goal}\n\n目标倾向：{goal_orientation}\n\n决策场景：{decision_scene}")
 time.sleep(1)
 # pyperclip.copy(f"#{urgency}+{importance}")
