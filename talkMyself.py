@@ -56,6 +56,7 @@ while loop_step:
             ask_intent = input(f"assistant: 为何提出【{text}】\n")
             if ask_intent == '返回':
                 step_one = True
+                step_two = True
                 break
             write_history(ask_intent)
             pyperclip.copy(ask_intent)
