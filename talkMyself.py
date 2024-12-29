@@ -99,19 +99,19 @@ while loop_step:
 
         # 步骤六（询问：决策场景是什么？）
         if step_six == True:
-            temporary = input("\n assistant: 决策场景是什么？\n")
+            decision_scene = input("\n assistant: 决策场景是什么？\n")
             step_six = False
             if temporary == "返回":
                 step_five = True
                 step_six = True
                 break
-            # else:
-            #     ultimate_goal = temporary
-            #     decision_scene = input("\n assistant: 决策场景是什么？\n")
-            #     write_history(decision_scene)
-            #     loop_controler = False
-            #     loop_step = False
-            #     break
+            else:
+                ultimate_goal = temporary
+                #decision_scene = input("\n assistant: 决策场景是什么？\n")
+                write_history(decision_scene)
+                loop_controler = False
+                loop_step = False
+                break
 
 
 # 步骤七
@@ -120,4 +120,4 @@ pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scen
 
 # #将对话记录写入文件
 # write_history(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}")
-# #time.sleep(1)
+#time.sleep(1)
