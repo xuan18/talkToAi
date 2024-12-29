@@ -99,23 +99,25 @@ while loop_step:
 
         # 步骤六（询问：决策场景是什么？）
         if step_six == True:
+            temporary = input("\n assistant: 决策场景是什么？\n")
             step_six = False
-
             if temporary == "返回":
                 step_five = True
                 step_six = True
                 break
-            else:
-                ultimate_goal = temporary
-                decision_scene = input("\n assistant: 决策场景是什么？\n")
-                write_history(decision_scene)
-                loop_controler = False
-                loop_step = False
-                break
+            # else:
+            #     ultimate_goal = temporary
+            #     decision_scene = input("\n assistant: 决策场景是什么？\n")
+            #     write_history(decision_scene)
+            #     loop_controler = False
+            #     loop_step = False
+            #     break
 
 
-# 步骤七（简称：显示代码）
-# 以 Markdown 代码输出，显示最终目标、目标倾向、决策场景。
+# 步骤七
+# 复制对话内容
 pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf\n\n已记录依据？")
-write_history(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}")
-time.sleep(1)
+
+# #将对话记录写入文件
+# write_history(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}")
+# #time.sleep(1)
