@@ -108,7 +108,7 @@ while loop_step:
             else:
                 ultimate_goal = temporary
                 #decision_scene = input("\n assistant: 决策场景是什么？\n")
-                write_history(decision_scene)
+                #write_history(decision_scene)
                 loop_controler = False
                 loop_step = False
                 break
