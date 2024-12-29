@@ -42,10 +42,10 @@ while loop_step:
             # 开始对话
             print(f"\n\n{pyperclip.paste()}\n")
             history.append(pyperclip.paste())
-            write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
+            #write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
             #print(f"# 明义优化文本 \n ")
             text = input("\nWhat?\n")
-            write_history(text)
+            #write_history(text)
             history.append(text)
 
         # 步骤二（简称：寻找意图）
@@ -58,7 +58,7 @@ while loop_step:
                 step_one = True
                 step_two = True
                 break
-            write_history(ask_intent)
+            #write_history(ask_intent)
             pyperclip.copy(ask_intent)
 
         # 步骤四（此待办属于个人，还是超越个人？）

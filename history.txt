@@ -1682,4 +1682,6 @@ ddd最终目标：d
 决策场景：简单
 https://workflowy.com/#/05b597b39bdf
 已记录依据？
+aa# 明义优化文本 
+ user: 经常拐到左边膝盖
 aa
