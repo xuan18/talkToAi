@@ -36,24 +36,35 @@ while loop_step:
         # 针对用户提供的文本中可能存在的语义不明确之处，持续提问以获得更清晰的理解。然后，基于这一理解优化并重写文本。
         if step_one == True:
             step_one = False
-            history = []
+            #history = []
             first_talk = False
 
             # 开始对话
             print(f"\n\n{pyperclip.paste()}\n")
-            history.append(pyperclip.paste())
+            #history.append(pyperclip.paste())
             #write_history(f"# 明义优化文本 \n user: {pyperclip.paste()}\n")
             #print(f"# 明义优化文本 \n ")
+
+            #写入文件
+            write_history("\n\n")
+            write_history(f"{pyperclip.paste()}\n")
             text = input("\nWhat?\n")
-            #write_history(text)
-            history.append(text)
+            write_history("What?")
+            write_history("\n")
+            write_history(text)
+            #history.append(text)
 
         # 步骤二（简称：寻找意图）
         # 询问用户：‘为何提出此？’
         if step_two == True:
             step_two = False
             #print("\n# 寻找意图")
+
+            #写入文件
+            write_history(f"\nassistant: 为何提出【{text}】\n")
             ask_intent = input(f"\nassistant: 为何提出【{text}】\n")
+            write_history(ask_intent)
+
             if ask_intent == '返回':
                 step_one = True
                 step_two = True
@@ -64,8 +75,13 @@ while loop_step:
         # 步骤四（此待办属于个人，还是超越个人？）
         #print("\n# 询问问题")
         if step_four == True:
-            temporary = input("\n此待办属于个人，还是超越个人？\n") #依据：https://workflowy.com/#/fc4dd028269b
             step_four = False
+
+            #写入文件
+            write_history("\n此待办属于个人，还是超越个人？\n")
+            temporary = input("\n此待办属于个人，还是超越个人？\n") #依据：https://workflowy.com/#/fc4dd028269b
+            write_history(temporary)
+
             if temporary == '返回':
                 step_two = True
                 step_four = True
@@ -81,8 +97,13 @@ while loop_step:
 
         # 步骤五（询问：目标倾向和最终目标是什么？）
         if step_five == True:
-            temporary = input("\n目标倾向和最终目标是什么？\n")
             step_five = False
+
+            #写入文件
+            write_history("\n目标倾向和最终目标是什么？\n")
+            temporary = input("\n目标倾向和最终目标是什么？\n")
+            write_history(temporary)
+
             if temporary == '返回':
                 step_four = True
                 step_five = True
@@ -99,8 +120,13 @@ while loop_step:
 
         # 步骤六（询问：决策场景是什么？）
         if step_six == True:
-            decision_scene = input("\n assistant: 决策场景是什么？\n")
             step_six = False
+
+            #写入文件
+            write_history("\nassistant: 决策场景是什么？\n")
+            decision_scene = input("\n assistant: 决策场景是什么？\n")
+            write_history(decision_scene)
+
             if temporary == "返回":
                 step_five = True
                 step_six = True
