@@ -142,7 +142,22 @@ while loop_step:
 
 # 步骤七
 # 复制对话内容
-pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf\n\n已记录依据？")
+# pyperclip.copy(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}\n\nhttps://workflowy.com/#/05b597b39bdf\n\n已记录依据？")
+pyperclip.copy(f"""
+<?xml version="1.0"?>
+<opml version="2.0">
+  <head>
+    <ownerEmail>
+      ljxzsx4@gmail.com
+    </ownerEmail>
+  </head>
+  <body>
+    <outline text="最终目标：{ultimate_goal}" />
+    <outline text="&lt;a href=&quot;https://workflowy.com/#/05b597b39bdf&quot;&gt;决策场景：{decision_scene}&lt;/a&gt;" />
+    <outline text="已记录依据？" />
+  </body>
+</opml>
+""")
 
 # #将对话记录写入文件
 # write_history(f"最终目标：{ultimate_goal}\n\n决策场景：{decision_scene}")
